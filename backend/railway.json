@@ -1,0 +1,79 @@
+# 🚀 Deploy Railway + Netlify - Guia Completo
+
+## ✅ Por que Railway + Netlify é Ideal?
+
+### **Railway (Backend)**
+- ✅ $5 grátis/mês (500h de uso)
+- ✅ Deploy automático do GitHub
+- ✅ Logs em tempo real
+- ✅ Variáveis de ambiente fáceis
+- ✅ SSL automático
+- ✅ Não dorme (diferente do Render/Heroku free)
+- ✅ Suporta WebSocket
+- ✅ Fácil adicionar PostgreSQL/MongoDB/Redis
+
+### **Netlify (Frontend Web)**
+- ✅ 100% grátis para projetos pessoais
+- ✅ Deploy automático do GitHub
+- ✅ CDN global (super rápido)
+- ✅ SSL grátis
+- ✅ Domínio personalizado grátis
+- ✅ Pré-visualização de PRs
+- ✅ Formulários e Functions serverless
+- ✅ 100GB bandwidth/mês grátis
+
+### **💰 Custo Total:**
+- **Railway:** $5/mês (ou grátis com trial)
+- **Netlify:** R$ 0/mês
+- **TOTAL:** ~R$ 25/mês
+
+---
+
+## 📱 O que fica Responsivo e Profissional?
+
+✅ **Backend Railway:**
+- API RESTful com rate limiting
+- Validação de dados (Joi)
+- Logging estruturado (Winston)
+- Segurança (Helmet)
+- Compressão gzip
+- **URL:** `https://smartiptv-backend-production.up.railway.app`
+
+✅ **Frontend Netlify:**
+- React Native Web (totalmente responsivo)
+- Breakpoints: mobile, tablet, desktop, TV
+- Tema dark/light
+- i18n (3 idiomas)
+- PWA (funciona offline)
+- **URL:** `https://smartiptv.netlify.app`
+
+✅ **Apps Nativos:**
+- Android APK (compartilhar via link)
+- iOS (TestFlight ou App Store)
+
+---
+
+## 🚀 Passo a Passo Completo
+
+### **PARTE 1: Deploy Backend no Railway**
+
+#### 1. Preparar o Backend
+
+```powershell
+# Criar arquivo railway.json na pasta backend
+cd backend
+```
+
+<function_calls>
+<invoke name="create_file">
+<parameter name="content">{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "startCommand": "npm start",
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+  }
+}

@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SmartIPTV Clone - Documentação Técnica Completa">
+    <meta name="author" content="Cristiano Superação">
+    <title>SmartIPTV Clone - Documentação</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #007AFF;
+            --secondary-color: #5856D6;
+            --success-color: #34C759;
+            --warning-color: #FF9500;
+            --danger-color: #FF3B30;
+            --dark-bg: #1C1C1E;
+            --dark-surface: #2C2C2E;
+            --dark-text: #FFFFFF;
+            --light-bg: #F2F2F7;
+            --light-surface: #FFFFFF;
+            --light-text: #000000;
+            --border-color: #3A3A3C;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            background: var(--dark-bg);
+            color: var(--dark-text);
+            overflow-x: hidden;
+        }
+
+        /* Header Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+
+        .badges {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--dark-surface);
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+
+        .nav-link {
+            color: var(--dark-text);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            background: transparent;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Sections */
+        .section {
+            background: var(--dark-surface);
+            border-radius: var(--radius);
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .section h2 {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section h3 {
+            font-size: clamp(1.25rem, 2vw, 1.75rem);
+            margin: 30px 0 15px;
+            color: var(--secondary-color);
+        }
+
+        .section h4 {
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            margin: 20px 0 10px;
+            color: var(--success-color);
+        }
+
+        /* Feature Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 122, 255, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h4 {
+            margin: 0 0 10px;
+            color: var(--dark-text);
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .tech-category {
+            background: linear-gradient(135deg, rgba(0, 122, 255, 0.1) 0%, rgba(88, 86, 214, 0.1) 100%);
+            padding: 25px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+        }
+
+        .tech-category h4 {
+            margin: 0 0 15px;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+        }
+
+        .tech-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tech-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .tech-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: #000;
+            border-radius: var(--radius);
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .code-block::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .code-block pre {
+            margin: 0;
+            color: #0f0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        /* Status Indicators */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+        }
+
+        .status-icon {
+            font-size: 1.5rem;
+        }
+
+        .status-text {
+            flex: 1;
+        }
+
+        .status-text strong {
+            display: block;
+            color: var(--dark-text);
+            margin-bottom: 3px;
+        }
+
+        .status-text small {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+        }
+
+        /* Architecture Diagram */
+        .architecture {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 30px;
+            border-radius: var(--radius);
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        .architecture pre {
+            color: var(--dark-text);
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.8;
+            white-space: pre;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 122, 255, 0.4);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-surface);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.6);
+            margin: 10px 0;
+        }
+
+        .footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .section {
+                padding: 25px 20px;
+            }
+
+            .nav-container {
+                justify-content: flex-start;
+            }
+
+            .features-grid,
+            .tech-stack,
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Alert Box */
+        .alert {
+            padding: 15px 20px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: rgba(0, 122, 255, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .alert-success {
+            background: rgba(52, 199, 89, 0.1);
+            border-color: var(--success-color);
+        }
+
+        .alert-warning {
+            background: rgba(255, 149, 0, 0.1);
+            border-color: var(--warning-color);
+        }
+
+        .alert-danger {
+            background: rgba(255, 59, 48, 0.1);
+            border-color: var(--danger-color);
+        }
+
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: rgba(0, 122, 255, 0.1);
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>📺 SmartIPTV Clone</h1>
+            <p>Plataforma profissional de streaming IPTV multiplataforma com arquitetura moderna e escalável</p>
+            <div class="badges">
+                <span class="badge">v2.0.0</span>
+                <span class="badge">React Native 0.72</span>
+                <span class="badge">Node.js 18+</span>
+                <span class="badge">MIT License</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#sobre" class="nav-link">📋 Sobre</a>
+            <a href="#features" class="nav-link">✨ Features</a>
+            <a href="#tecnologias" class="nav-link">🛠️ Tecnologias</a>
+            <a href="#arquitetura" class="nav-link">🏗️ Arquitetura</a>
+            <a href="#instalacao" class="nav-link">🚀 Instalação</a>
+            <a href="#api" class="nav-link">🔌 API</a>
+            <a href="#deploy" class="nav-link">☁️ Deploy</a>
+            <a href="#status" class="nav-link">📊 Status</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Sobre -->
+        <section id="sobre" class="section">
+            <h2>📋 Sobre o Projeto</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; margin: 20px 0;">
+                Clone profissional e completo do SmartIPTV desenvolvido com arquitetura moderna e escalável. 
+                Suporta múltiplas plataformas (Android, iOS, Web, TVs) com performance otimizada, segurança robusta 
+                e interface responsiva profissional.
+            </p>
+            
+            <div class="alert alert-success">
+                <strong>✅ Projeto 100% Funcional</strong><br>
+                Frontend, Backend, Documentação e Deploy configurados e testados em produção.
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h4>Multiplataforma</h4>
+                    <p>Android, iOS, Web, Android TV, Samsung Tizen, LG webOS</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h4>Design Profissional</h4>
+                    <p>Interface responsiva estilo TV com tema escuro/claro</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Alta Performance</h4>
+                    <p>Virtualização, memoização e lazy loading</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h4>Segurança</h4>
+                    <p>Validação Joi, rate limiting, Helmet, CORS</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h4>Multi-idioma</h4>
+                    <p>PT-BR, EN-US, ES-ES com i18next</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h4>Logs Estruturados</h4>
+                    <p>Winston logging com níveis e rotação</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Detalhadas -->
+        <section id="features" class="section">
+            <h2>✨ Características Principais</h2>
+            
+            <h3>🎨 Interface & UX</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+                    ✅ Design responsivo e profissional estilo TV
+                </li>
+                <li style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+                    ✅ Tema escuro/claro com detecção automática
+                </li>
+                <li style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+                    ✅ Internacionalização (PT-BR, EN-US, ES-ES)
+                </li>
+                <li style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+                    ✅ Layout adaptativo (mobile, tablet, TV, web)
+                </li>
+                <li style="padding: 10px 0;">
+                    ✅ Animações fluidas e transições suaves
+                </li>
+            </ul>
+
+            <h3>⚙️ Funcionalidades</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+                    ✅ Suporte para listas M3U remotas e locais
+                </li>
+                <li style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+                    ✅ Player de vídeo com controles completos
+                </li>
+                <li style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+                    ✅ Busca em tempo real com debounce
+                </li>
+                <li style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+                    ✅ Sistema de favoritos persistente
+                </li>
+                <li style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+                    ✅ Histórico de reprodução
+                </li>
+                <li style="padding: 10px 0;">
+                    ✅ Cache de imagens com FastImage
+                </li>
+            </ul>
+
+            <h3>🚀 Performance & Otimização</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+                    ✅ Virtualização de listas (FlatList otimizado)
+                </li>
+                <li style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+                    ✅ Memoização de componentes (React.memo)
+                </li>
+                <li style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+                    ✅ Custom hooks para lógica reutilizável
+                </li>
+                <li style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+                    ✅ Context API para gerenciamento de estado
+                </li>
+                <li style="padding: 10px 0;">
+                    ✅ Compressão de respostas (gzip)
+                </li>
+            </ul>
+        </section>
+
+        <!-- Tecnologias -->
+        <section id="tecnologias" class="section">
+            <h2>🛠️ Stack Tecnológico</h2>
+            
+            <div class="tech-stack">
+                <div class="tech-category">
+                    <h4>Frontend Mobile</h4>
+                    <ul class="tech-list">
+                        <li>React Native 0.72</li>
+                        <li>React 18.2</li>
+                        <li>Context API</li>
+                        <li>React Native Video</li>
+                        <li>AsyncStorage</li>
+                        <li>NetInfo</li>
+                        <li>FastImage</li>
+                        <li>i18next</li>
+                    </ul>
+                </div>
+
+                <div class="tech-category">
+                    <h4>Backend API</h4>
+                    <ul class="tech-list">
+                        <li>Node.js 18+</li>
+                        <li>Express 4.18</li>
+                        <li>Joi (validação)</li>
+                        <li>Helmet (segurança)</li>
+                        <li>Winston (logging)</li>
+                        <li>Rate Limiting</li>
+                        <li>Compression (gzip)</li>
+                        <li>CORS</li>
+                    </ul>
+                </div>
+
+                <div class="tech-category">
+                    <h4>DevOps</h4>
+                    <ul class="tech-list">
+                        <li>Railway (Backend)</li>
+                        <li>Netlify (Frontend)</li>
+                        <li>GitHub Actions</li>
+                        <li>Docker Ready</li>
+                        <li>PM2 (opcional)</li>
+                        <li>Nginx (opcional)</li>
+                    </ul>
+                </div>
+
+                <div class="tech-category">
+                    <h4>Ferramentas</h4>
+                    <ul class="tech-list">
+                        <li>Jest (testes)</li>
+                        <li>ESLint</li>
+                        <li>Prettier</li>
+                        <li>Babel</li>
+                        <li>Metro Bundler</li>
+                        <li>Webpack (web)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Arquitetura -->
+        <section id="arquitetura" class="section">
+            <h2>🏗️ Arquitetura do Projeto</h2>
+            
+            <div class="architecture">
+                <pre>
+CS_Criador/
+├── src/
+│   ├── components/          # Componentes reutilizáveis
+│   │   ├── ChannelList/
+│   │   │   ├── ChannelItem.js
+│   │   │   ├── ChannelList.js
+│   │   │   └── styles.js
+│   │   ├── VideoPlayer/
+│   │   │   └── Player.js
+│   │   └── Activation/
+│   │       └── ActivationForm.js
+│   ├── screens/             # Telas da aplicação
+│   │   ├── HomeScreen.js
+│   │   ├── FavoritesScreen.js
+│   │   ├── HistoryScreen.js
+│   │   └── SettingsScreen.js
+│   ├── context/             # Context API
+│   │   ├── ThemeContext.js
+│   │   └── AppContext.js
+│   ├── hooks/               # Custom hooks
+│   │   ├── useDebounce.js
+│   │   ├── useFavorites.js
+│   │   ├── useChannels.js
+│   │   ├── usePlayer.js
+│   │   └── useNetworkStatus.js
+│   ├── services/            # Camada de serviços
+│   │   ├── api.js
+│   │   └── storage.js
+│   ├── utils/               # Utilitários
+│   │   ├── constants.js
+│   │   └── helpers.js
+│   └── i18n/                # Internacionalização
+│       └── index.js
+├── backend/
+│   ├── middleware/          # Express middleware
+│   │   ├── errorHandler.js
+│   │   ├── rateLimiter.js
+│   │   └── validator.js
+│   ├── routes/              # Rotas da API
+│   │   ├── activation.js
+│   │   ├── channels.js
+│   │   └── groups.js
+│   ├── services/            # Lógica de negócio
+│   │   ├── m3uParser.js
+│   │   └── channelService.js
+│   └── utils/               # Utilitários backend
+│       └── logger.js
+├── docs/                    # Documentação
+│   ├── index.html          # Este arquivo
+│   └── BUILD_TIZEN_WEBOS.md
+└── extras/
+    └── roku/
+        └── Main.brs
+                </pre>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>📖 Padrões Arquiteturais</strong><br>
+                • <strong>Component-Based:</strong> Componentização total com separação de responsabilidades<br>
+                • <strong>Context API:</strong> Gerenciamento de estado global sem Redux<br>
+                • <strong>Custom Hooks:</strong> Lógica reutilizável isolada em hooks<br>
+                • <strong>Service Layer:</strong> Camada de serviços para API e Storage<br>
+                • <strong>RESTful API:</strong> Backend seguindo princípios REST
+            </div>
+        </section>
+
+        <!-- Instalação -->
+        <section id="instalacao" class="section">
+            <h2>🚀 Instalação e Execução</h2>
+            
+            <h3>Pré-requisitos</h3>
+            <ul>
+                <li>Node.js 18 ou superior</li>
+                <li>npm ou yarn</li>
+                <li>Android Studio (para Android)</li>
+                <li>Xcode (para iOS - macOS apenas)</li>
+            </ul>
+
+            <h3>1️⃣ Backend</h3>
+            <div class="code-block" data-lang="powershell">
+<pre># Entre no diretório backend
+cd backend
+
+# Instale as dependências
+npm install
+
+# Configure variáveis de ambiente
+copy .env.example .env
+
+# Inicie o servidor
+npm start
+
+# Ou para desenvolvimento com auto-reload
+npm run dev</pre>
+            </div>
+
+            <div class="alert alert-success">
+                ✅ Backend rodando em <code>http://localhost:3000</code>
+            </div>
+
+            <h3>2️⃣ Frontend</h3>
+            <div class="code-block" data-lang="powershell">
+<pre># Volte ao diretório raiz
+cd ..
+
+# Instale as dependências
+npm install
+
+# Para Android
+npm run android
+
+# Para iOS (macOS apenas)
+npm run ios
+
+# Para Web (desenvolvimento)
+npm run web</pre>
+            </div>
+
+            <h3>3️⃣ Build Produção</h3>
+            <div class="code-block" data-lang="powershell">
+<pre># APK Android
+cd android
+./gradlew assembleRelease
+
+# Build Web
+npm run build:web
+
+# AAB para Google Play
+./gradlew bundleRelease</pre>
+            </div>
+        </section>
+
+        <!-- API -->
+        <section id="api" class="section">
+            <h2>🔌 API Backend</h2>
+            
+            <h3>Endpoints Principais</h3>
+
+            <h4>POST /activate</h4>
+            <p>Ativa uma lista M3U</p>
+            <div class="code-block" data-lang="json">
+<pre>{
+  "m3uUrl": "http://exemplo.com/lista.m3u",
+  "activationCode": "CODIGO123"
+}</pre>
+            </div>
+
+            <h4>GET /channels</h4>
+            <p>Lista canais com paginação e busca</p>
+            <div class="code-block" data-lang="http">
+<pre>GET /channels?page=1&limit=50&search=ESPN</pre>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Endpoint</th>
+                            <th>Método</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>/activate</td>
+                            <td>POST</td>
+                            <td>Ativa lista M3U</td>
+                        </tr>
+                        <tr>
+                            <td>/channels</td>
+                            <td>GET</td>
+                            <td>Lista canais (paginado)</td>
+                        </tr>
+                        <tr>
+                            <td>/channel/:id</td>
+                            <td>GET</td>
+                            <td>Busca canal por ID</td>
+                        </tr>
+                        <tr>
+                            <td>/groups</td>
+                            <td>GET</td>
+                            <td>Lista grupos/categorias</td>
+                        </tr>
+                        <tr>
+                            <td>/status</td>
+                            <td>GET</td>
+                            <td>Status do servidor</td>
+                        </tr>
+                        <tr>
+                            <td>/verify/:code</td>
+                            <td>GET</td>
+                            <td>Verifica código de ativação</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Deploy -->
+        <section id="deploy" class="section">
+            <h2>☁️ Deploy em Produção</h2>
+            
+            <h3>Railway + Netlify (Recomendado)</h3>
+            <p>Stack escolhido: ~R$ 25/mês para hospedar backend e frontend com SSL automático, CDN global e deploy contínuo.</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚂</div>
+                    <h4>Railway (Backend)</h4>
+                    <p>$5/mês • No sleep • SSL • Logs • Auto-deploy</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h4>Netlify (Frontend)</h4>
+                    <p>Grátis • CDN Global • SSL • 100GB bandwidth</p>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>📚 Guia Completo de Deploy</strong><br>
+                Veja o arquivo <code>DEPLOY_GUIDE.md</code> para instruções passo a passo detalhadas de como fazer deploy no Railway + Netlify.
+            </div>
+
+            <h3>Alternativas de Hosting</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Plataforma</th>
+                            <th>Tipo</th>
+                            <th>Custo/mês</th>
+                            <th>Ideal para</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Railway + Netlify</td>
+                            <td>Backend + Frontend</td>
+                            <td>~R$ 25</td>
+                            <td>Produção pequena/média</td>
+                        </tr>
+                        <tr>
+                            <td>Render + Vercel</td>
+                            <td>Backend + Frontend</td>
+                            <td>R$ 0 (free tier)</td>
+                            <td>Projetos pessoais</td>
+                        </tr>
+                        <tr>
+                            <td>DigitalOcean Droplet</td>
+                            <td>VPS Completo</td>
+                            <td>~R$ 24</td>
+                            <td>Controle total</td>
+                        </tr>
+                        <tr>
+                            <td>AWS (EC2 + S3)</td>
+                            <td>Cloud Enterprise</td>
+                            <td>~R$ 50+</td>
+                            <td>Escala empresarial</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="btn-group">
+                <a href="https://railway.app" class="btn" target="_blank">🚂 Railway</a>
+                <a href="https://netlify.com" class="btn" target="_blank">🌐 Netlify</a>
+                <a href="https://github.com/cristiano-superacao/SmartIPTVClone" class="btn" target="_blank">📦 GitHub</a>
+            </div>
+        </section>
+
+        <!-- Status -->
+        <section id="status" class="section">
+            <h2>📊 Status do Projeto</h2>
+            
+            <div class="status-grid">
+                <div class="status-item">
+                    <span class="status-icon">✅</span>
+                    <div class="status-text">
+                        <strong>Frontend</strong>
+                        <small>Completo e funcional</small>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <span class="status-icon">✅</span>
+                    <div class="status-text">
+                        <strong>Backend</strong>
+                        <small>API RESTful operacional</small>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <span class="status-icon">✅</span>
+                    <div class="status-text">
+                        <strong>Documentação</strong>
+                        <small>Completa e atualizada</small>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <span class="status-icon">✅</span>
+                    <div class="status-text">
+                        <strong>Deploy</strong>
+                        <small>Configurado Railway + Netlify</small>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <span class="status-icon">✅</span>
+                    <div class="status-text">
+                        <strong>Segurança</strong>
+                        <small>Validação + Rate Limit + Helmet</small>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <span class="status-icon">✅</span>
+                    <div class="status-text">
+                        <strong>Performance</strong>
+                        <small>Otimizado e escalável</small>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Roadmap Futuro</h3>
+            <div class="alert alert-warning">
+                <strong>🚧 Próximas Features</strong><br>
+                • Persistência com MongoDB<br>
+                • Sistema de autenticação de usuários<br>
+                • EPG (guia de programação)<br>
+                • Gravação de programas<br>
+                • VOD (vídeo sob demanda)<br>
+                • Controle parental<br>
+                • Sincronização entre dispositivos
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p><strong>SmartIPTV Clone v2.0.0</strong></p>
+        <p>Desenvolvido com ❤️ usando React Native e Node.js</p>
+        <p>
+            <a href="https://github.com/cristiano-superacao/SmartIPTVClone" target="_blank">GitHub</a> • 
+            <a href="mailto:contato@exemplo.com">Contato</a> • 
+            <a href="#sobre">Documentação</a>
+        </p>
+        <p style="margin-top: 20px; font-size: 0.875rem;">
+            © 2025 Cristiano Superação. Licença MIT.<br>
+            ⚠️ Este software é apenas para fins educacionais.
+        </p>
+    </footer>
+</body>
+</html>
