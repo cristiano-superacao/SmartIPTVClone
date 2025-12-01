@@ -6,8 +6,10 @@ import {
   ScrollView,
   Switch,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from '../context/ThemeContext';
@@ -15,6 +17,7 @@ import { useApp } from '../context/AppContext';
 
 const SettingsScreen = () => {
   const { t, i18n } = useTranslation();
+  const navigation = useNavigation();
   const { colors, isDark, toggleTheme } = useTheme();
   const { settings, updateSettings, deactivate } = useApp();
 
@@ -31,7 +34,24 @@ const SettingsScreen = () => {
   };
 
   const handleDeactivate = async () => {
-    await deactivate();
+    Alert.alert(
+      'Confirmar desativação',
+      'Deseja realmente desativar a lista atual? Esta ação não pode ser desfeita.',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Desativar',
+          style: 'destructive',
+          onPress: async () => {
+            await deactivate();
+          },
+        },
+      ]
+    );
+  };
+
+  const navigateToPlaylists = () => {
+    navigation.navigate('PlaylistManager');
   };
 
   const styles = StyleSheet.create({
@@ -126,6 +146,28 @@ const SettingsScreen = () => {
 
   return (
     <ScrollView style={styles.container}>
+      {/* Playlists */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Listas</Text>
+        <TouchableOpacity style={styles.settingItem} onPress={navigateToPlaylists}>
+          <View style={styles.settingLeft}>
+            <Icon
+              name="playlist-play"
+              size={24}
+              color={colors.primary}
+              style={styles.settingIcon}
+            />
+            <View style={styles.settingText}>
+              <Text style={styles.settingTitle}>Gerenciar Playlists</Text>
+              <Text style={styles.settingDescription}>
+                Adicionar e gerenciar múltiplas listas
+              </Text>
+            </View>
+          </View>
+          <Icon name="chevron-right" size={24} color={colors.textSecondary} />
+        </TouchableOpacity>
+      </View>
+
       {/* Tema */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>{t('theme')}</Text>

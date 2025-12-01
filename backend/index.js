@@ -16,6 +16,7 @@ const logger = require('./utils/logger');
 const activationRoutes = require('./routes/activation');
 const channelsRoutes = require('./routes/channels');
 const groupsRoutes = require('./routes/groups');
+const playlistsRoutes = require('./routes/playlists');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -91,6 +92,7 @@ app.get('/api/status', (req, res) => {
 app.use('/api/activate', activationRoutes);
 app.use('/api/channels', channelsRoutes);
 app.use('/api/groups', groupsRoutes);
+app.use('/api/playlists', playlistsRoutes);
 
 // 404 handler
 app.use(notFound);

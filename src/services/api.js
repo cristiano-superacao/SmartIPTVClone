@@ -159,6 +159,82 @@ class ApiService {
       return { success: false, error: 'Servidor offline' };
     }
   }
+
+  // ============================================
+  // PLAYLIST MANAGEMENT
+  // ============================================
+
+  /**
+   * Cria nova playlist
+   */
+  async createPlaylist(playlistData) {
+    const response = await apiClient.post('/playlists', playlistData);
+    return response.data;
+  }
+
+  /**
+   * Lista todas as playlists
+   */
+  async getPlaylists() {
+    const response = await apiClient.get('/playlists');
+    return response.data;
+  }
+
+  /**
+   * Busca playlist específica
+   */
+  async getPlaylist(id) {
+    const response = await apiClient.get(`/playlists/${id}`);
+    return response.data;
+  }
+
+  /**
+   * Atualiza playlist
+   */
+  async updatePlaylist(id, updates) {
+    const response = await apiClient.put(`/playlists/${id}`, updates);
+    return response.data;
+  }
+
+  /**
+   * Remove playlist
+   */
+  async deletePlaylist(id) {
+    const response = await apiClient.delete(`/playlists/${id}`);
+    return response.data;
+  }
+
+  /**
+   * Ativa playlist e carrega canais
+   */
+  async activatePlaylist(id) {
+    const response = await apiClient.post(`/playlists/${id}/activate`);
+    return response.data;
+  }
+
+  /**
+   * Atualiza canais da playlist
+   */
+  async refreshPlaylist(id) {
+    const response = await apiClient.post(`/playlists/${id}/refresh`);
+    return response.data;
+  }
+
+  /**
+   * Busca estatísticas da playlist
+   */
+  async getPlaylistStats(id) {
+    const response = await apiClient.get(`/playlists/${id}/stats`);
+    return response.data;
+  }
+
+  /**
+   * Testa conexão com servidor
+   */
+  async testConnection(serverData) {
+    const response = await apiClient.post('/playlists/test-connection', serverData);
+    return response.data;
+  }
 }
 
 export default new ApiService();
